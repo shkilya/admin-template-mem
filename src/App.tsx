@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import './App.css';
-import {Admin, Datagrid, DateField, EditButton, List, Resource, TextField} from "react-admin";
-import jsonServerProvider from 'ra-data-json-server';
+import {Admin, Datagrid, EditButton, List, Resource, TextField} from "react-admin";
+import simpleRestProvider from 'ra-data-simple-rest';
+
 
 const baseURL = 'http://localhost:8030';
 
@@ -11,7 +12,7 @@ const PostList: FC = (props) => {
             <Datagrid>
                 <TextField source="id"/>
                 <TextField source="title"/>
-                <DateField source="description"/>
+                <TextField source="description"/>
                 <EditButton basePath="/posts"/>
             </Datagrid>
         </List>
@@ -20,12 +21,12 @@ const PostList: FC = (props) => {
 
 
 function App() {
+
+    
     return (
-        <Admin dataProvider={jsonServerProvider(baseURL)}>
+        <Admin dataProvider={simpleRestProvider(baseURL)}>
             <Resource name="blog" list={PostList}/>
-            <Resource name="test" list={() => {
-                return (<>cxzxzc</>)
-            }}/>
+            <Resource name="test" list={() => (<>cxzxzc</>)}/>
         </Admin>
     );
 }
